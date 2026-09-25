@@ -80,4 +80,5 @@ export class Home {
       console.log('Dados do agendamento enviados:', this.agendamento);
     }
   }
+  
 }
