@@ -16,6 +16,49 @@
       <p>Seu login foi realizado com sucesso de acordo com as normas da LGPD.</p>
     </section>
 
+    <!-- CARROSSEL DE VEÍCULOS CENTRALIZADO -->
+    <section class="carousel-card">
+      <div class="carousel-container">
+        <!-- Botão Esquerda -->
+        <button type="button" class="carousel-btn prev" (click)="prevSlide()" aria-label="Anterior">&#10094;</button>
+
+        <!-- Conteúdo Centralizado (Imagem + Título) -->
+        <div class="carousel-slide">
+          <div class="image-wrapper">
+            <img 
+              [src]="veiculos[currentIndex].imagem" 
+              [alt]="veiculos[currentIndex].nome" 
+              class="carousel-image" 
+              [class.selected-img]="agendamento.modelo === veiculos[currentIndex].nome"
+            />
+          </div>
+          <h3 
+            class="carousel-title" 
+            [class.selected-title]="agendamento.modelo === veiculos[currentIndex].nome">
+            Ford {{ veiculos[currentIndex].nome }}
+            @if (agendamento.modelo === veiculos[currentIndex].nome) {
+              <span class="badge-selected">✓ Selecionado</span>
+            }
+          </h3>
+        </div>
+
+        <!-- Botão Direita -->
+        <button type="button" class="carousel-btn next" (click)="nextSlide()" aria-label="Próximo">&#10095;</button>
+      </div>
+
+      <!-- Indicadores (Pontinhos) -->
+      <div class="carousel-indicators">
+        @for (veiculo of veiculos; track $index) {
+          <span 
+            class="dot" 
+            [class.active]="$index === currentIndex" 
+            (click)="irParaSlide($index)">
+          </span>
+        }
+      </div>
+    </section>
+
+    <!-- FORMULÁRIO DE AGENDAMENTO -->
     <section class="booking-card">
       <h2>Agendar Serviço ou Test-Drive</h2>
       <p class="subtitle">Preencha seus dados para realizar o agendamento do seu veículo Ford</p>
@@ -62,7 +105,12 @@
 
           <div class="form-group">
             <label for="modelo">Modelo do Veículo</label>
-            <select id="modelo" name="modelo" [(ngModel)]="agendamento.modelo" required>
+            <select 
+              id="modelo" 
+              name="modelo" 
+              [(ngModel)]="agendamento.modelo" 
+              (ngModelChange)="onModeloChange($event)" 
+              required>
               <option value="" disabled selected>Selecione um veículo</option>
               <option value="Ranger">Ford Ranger</option>
               <option value="Mustang">Ford Mustang</option>

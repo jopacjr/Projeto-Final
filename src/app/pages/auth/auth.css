@@ -35,3 +35,17 @@ button:hover{
   color: #ffffff;
   background-color:#003478 ;
 }
+* Centraliza os elementos da área do logo e do título */
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Define um tamanho adequado para o logo */
+.ford-logo {
+  max-width: 150px; /* Ajuste a largura conforme preferir */
+  height: auto;
+  margin-bottom: 0.5rem; /* Espaçamento entre o logo e o título */
+}

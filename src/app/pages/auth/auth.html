@@ -1,27 +1,67 @@
-<body>
-  <div class="auth-container">
-    <h2>{{isLoginMode ? 'Login' : 'Cadastro'}}</h2>
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="logo-area">
+      <img src="img/ford_logo.png" alt="Ford Logo" class="ford-logo">
+      <h2>{{ isLogin ? 'Acessar Conta' : 'Criar Conta' }}</h2>
+    </div>
 
-    <form [formGroup]="form" (ngSubmit)="OnSubmit()">
+    <form (ngSubmit)="onSubmit()" #authForm="ngForm">
+      @if (!isLogin) {
+        <div class="form-group">
+          <label for="nome">Nome Completo</label>
+          <input type="text" id="nome" name="nome" [(ngModel)]="authData.nome" required placeholder="Seu nome completo">
+        </div>
+      }
 
-      <div *ngIf="!isLoginMode">
-        <label for="name">Nome :</label>
-        <input id="name" formControlName="name">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" [(ngModel)]="authData.email" required email placeholder="seu.email@exemplo.com">
       </div>
 
-      <label for="email">Email :</label>
-      <input  id="email" type="email" formControlName="email">
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" [(ngModel)]="authData.senha" required minlength="6" placeholder="Sua senha">
+      </div>
 
-      <label for="password">Senha :</label>
-      <input id="password" type="password"  formControlName="password" [placeholder]="isLoginMode ? '' : 'Informe pelo menos 6 digitos'">
+      <!-- Novo campo: Confirmar Senha -->
+      @if (!isLogin) {
+        <div class="form-group">
+          <label for="confirmarSenha">Confirmar Senha</label>
+          <input 
+            type="password" 
+            id="confirmarSenha" 
+            name="confirmarSenha" 
+            [(ngModel)]="authData.confirmarSenha" 
+            required 
+            placeholder="Repita sua senha"
+          >
+        </div>
 
-      <button type="submit">{{isLoginMode ? 'Entrar' : 'Cadastrar'}}</button>
+        @if (authData.senha && authData.confirmarSenha && authData.senha !== authData.confirmarSenha) {
+          <p class="error-msg">⚠️ As senhas não coincidem.</p>
+        }
+      }
 
+      @if (errorMessage) {
+        <p class="error-msg">{{ errorMessage }}</p>
+      }
+
+      <button 
+        type="submit" 
+        class="btn-primary" 
+        [disabled]="!authForm.form.valid || (!isLogin && authData.senha !== authData.confirmarSenha)"
+      >
+        {{ isLogin ? 'Entrar' : 'Cadastrar' }}
+      </button>
     </form>
 
-    <p>
-      {{isLoginMode ? 'Não tem conta?' : 'Já tem conta?'}}
-      <button (click)="toggleMode()">{{isLoginMode ? 'Criar conta' : 'Fazer login'}}</button>
-    </p>
+    <div class="auth-toggle">
+      <p>
+        {{ isLogin ? 'Ainda não tem uma conta?' : 'Já possui uma conta?' }}
+        <button type="button" class="btn-link" (click)="toggleMode()">
+          {{ isLogin ? 'Cadastre-se' : 'Faça Login' }}
+        </button>
+      </p>
+    </div>
   </div>
-</body>
+</div>

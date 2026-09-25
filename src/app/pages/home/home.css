@@ -65,6 +65,112 @@
   color: #555555;
 }
 
+/* Card do Carrossel */
+.carousel-card {
+  background: #ffffff;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-top: 5px solid #002c6c;
+  margin-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Container do Carrossel com alinhamento das setas e do conteúdo central */
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
+/* Área central do Slide */
+.carousel-slide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Envolvente da imagem para fixar tamanho e centralização */
+.image-wrapper {
+  width: 100%;
+  max-width: 450px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Título do modelo centralizado */
+.carousel-title {
+  color: #002c6c;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+/* Setas laterais perfeitamente alinhadas */
+.carousel-btn {
+  background-color: rgba(0, 44, 108, 0.08);
+  color: #002c6c;
+  border: 1px solid rgba(0, 44, 108, 0.2);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.carousel-btn:hover {
+  background-color: #002c6c;
+  color: #ffffff;
+  border-color: #002c6c;
+}
+
+/* Indicadores / Bolinhas */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1.2rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #cccccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background-color: #1072b8;
+  transform: scale(1.25);
+}
+
 /* Card do Formulário */
 .booking-card {
   background: #ffffff;
@@ -175,5 +281,45 @@
   color: #155724;
   border-radius: 6px;
   text-align: center;
+  font-weight: 600;
+}
+
+/* Efeito de destaque para a imagem quando o veículo estiver selecionado */
+.carousel-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Quando o veículo do carrossel corresponde ao veículo selecionado no form */
+.carousel-image.selected-img {
+  transform: scale(1.06);
+  filter: drop-shadow(0px 8px 16px rgba(0, 44, 108, 0.35));
+}
+
+/* Título com destaque */
+.carousel-title {
+  color: #002c6c;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Badge indicando a seleção confirmada */
+.badge-selected {
+  background-color: #1072b8;
+  color: #ffffff;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
   font-weight: 600;
 }
